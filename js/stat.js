@@ -47,7 +47,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], barX, CLOUD_HEIGHT - GAP);
 
-    ctx.fillStyle = names[i] === USER_NAME ? 'rgba(255, 0, 0, 1)' : 'hsl(240,' + this.Math.random() * 100 + '%, 50%)';
+    ctx.fillStyle = names[i] === USER_NAME ? 'rgba(255, 0, 0, 1)' : 'hsl(240,' + Math.random() * 100 + '%, 50%)';
     ctx.fillRect(barX, barY, BAR_WIDTH, barHeight);
 
     var textHeight = (BAR_HEIGHT * Math.floor(times[i])) / maxTime;
