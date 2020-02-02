@@ -1,9 +1,10 @@
 'use strict';
 
-var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Ирвинг', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго'];
+var WIZARD_NAMES = [' Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES = ['black', 'red', 'blue', 'yellow', 'green'];
+var WIZARDS_COUNT = 4;
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
@@ -13,29 +14,29 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-var wizards = [
-  {
-    name: WIZARD_NAMES[(Math.floor(Math.random() * (WIZARD_NAMES.length)))] + ' ' + WIZARD_SURNAMES[(Math.floor(Math.random() * (WIZARD_SURNAMES.length)))],
-    coatColor: COAT[(Math.floor(Math.random() * (COAT.length)))],
-    eyesColor: EYES[(Math.floor(Math.random() * (EYES.length)))]
-  },
-  {
-    name: WIZARD_NAMES[(Math.floor(Math.random() * (WIZARD_NAMES.length)))] + ' ' + WIZARD_SURNAMES[(Math.floor(Math.random() * (WIZARD_SURNAMES.length)))],
-    coatColor: COAT[(Math.floor(Math.random() * (COAT.length)))],
-    eyesColor: EYES[(Math.floor(Math.random() * (EYES.length)))]
-  },
-  {
-    name: WIZARD_NAMES[(Math.floor(Math.random() * (WIZARD_NAMES.length)))] + ' ' + WIZARD_SURNAMES[(Math.floor(Math.random() * (WIZARD_SURNAMES.length)))],
-    coatColor: COAT[(Math.floor(Math.random() * (COAT.length)))],
-    eyesColor: EYES[(Math.floor(Math.random() * (EYES.length)))]
-  },
-  {
-    name: WIZARD_NAMES[(Math.floor(Math.random() * (WIZARD_NAMES.length)))] + ' ' + WIZARD_SURNAMES[(Math.floor(Math.random() * (WIZARD_SURNAMES.length)))],
-    coatColor: COAT[(Math.floor(Math.random() * (COAT.length)))],
-    eyesColor: EYES[(Math.floor(Math.random() * (EYES.length)))]
-  }
-];
+// Функция генерирующая случайное число
+var getRundomNumber = function (number) {
+  return Math.floor(Math.random() * number);
+};
 
+var generateWizard = function (wizardsCount) {
+  var result = [];
+  for (var i = 0; i <= wizardsCount; i++) {
+    var randomName = WIZARD_NAMES[getRundomNumber(WIZARD_NAMES.length)];
+    var randomSurname = WIZARD_SURNAMES[getRundomNumber(WIZARD_SURNAMES.length)];
+    var fullName = randomName + ' ' + randomSurname;
+    var randomCoatColor = COAT[getRundomNumber(COAT.length)];
+    var randomEyesColor = EYES[getRundomNumber(EYES.length)];
+    result.push({
+      name: fullName,
+      coatColor: randomCoatColor,
+      eyesColor: randomEyesColor
+    });
+  }
+  return result;
+};
+
+var wizards = generateWizard(WIZARDS_COUNT);
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
